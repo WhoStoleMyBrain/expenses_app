@@ -51,9 +51,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  final List<Transaction> _userTransaction = [
-  ];
+  final List<Transaction> _userTransaction = [];
 
   List<Transaction> get _recentTransactions {
     return _userTransaction.where(
@@ -63,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount, DateTime chosenDate) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
         title: txTitle,
@@ -71,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
         date: chosenDate);
     setState(() {
       _userTransaction.add(newTx);
+      _sortTransactions();
     });
   }
 
@@ -90,7 +90,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void _deleteTransaction(String id) {
     setState(() {
       _userTransaction.removeWhere((tx) => tx.id == id);
+      _sortTransactions();
     });
+  }
+
+  void _sortTransactions() {
+    if (_userTransaction.length > 1) {
+      _userTransaction.sort(
+        (a, b) {
+          return -a.date.compareTo(b.date);
+        },
+      );
+    }
   }
 
   @override
@@ -112,7 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Chart(_recentTransactions),
-          Expanded(child: TransactionList(_userTransaction, _deleteTransaction)),
+          Expanded(
+              child: TransactionList(_userTransaction, _deleteTransaction)),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

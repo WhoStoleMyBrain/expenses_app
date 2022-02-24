@@ -4,7 +4,6 @@ import '../models/transaction.dart';
 import './chart_bar.dart';
 
 class Chart extends StatelessWidget {
-  // const Chart({Key? key}) : super(key: key);
   final List<Transaction> recentTransactions;
   Chart(this.recentTransactions);
 
