@@ -51,18 +51,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // final titleController = TextEditingController();
-  //
-  // final amountController = TextEditingController();
 
   final List<Transaction> _userTransaction = [
-    // Transaction(
-    //     id: 't1', title: 'New Shows', amount: 69.99, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2',
-    //     title: 'Weekly Groceries',
-    //     amount: 35.22,
-    //     date: DateTime.now()),
   ];
 
   List<Transaction> get _recentTransactions {
